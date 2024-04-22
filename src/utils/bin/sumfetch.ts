@@ -17,7 +17,7 @@ const sumfetch = async (args: string[]): Promise<string> => {
     AMMM'    VMMA. YVmmmMMMMMMMMMMML MmmmY          MMMMMMM                 -----------
    ,AMMA   _,HMMMMmdMMMMMMMMMMMMMMMML'VMV'         ,MMMMMMM                  ABOUT
    AMMMA _'MMMMMMMMMMMMMMMMMMMMMMMMMMA '           MMMMMMMM                  ${config.name}
-  ,AMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMa      ,,,    MMMMMMM                  ${config.title}
+  ,AMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMa      ,,,    MMMMMMM                  ${config.subtitle}
   AMMMMMMMMM'~'YMMMMMMMMMMMMMMMMMMMMMMA    ,AMMV    MMMMMMM                 
   VMV MMMMMV    YMMMMMMMMMMMMMMMMMMMMMY    VMMY'  adMMMMMMM                  <u><a href="${config.resume_url}" target="_blank">Resume</a></u>
    V  MMMM'       YMMMMMMMV.~~~~~~~~~,aado, V''   MMMMMMMMM                 
