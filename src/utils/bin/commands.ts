@@ -5,14 +5,37 @@ import config from '../../../config.json';
 
 // Help
 export const help = async (args: string[]): Promise<string> => {
-  const commands = Object.keys(bin).sort().join(', ');
+  // const commands = Object.keys(bin).join(', ');
+  const commands = {
+    help: 'Display this help message.',
+    about: 'Display information about this website.',
+    resume: 'Open my resume.',
+    // repo: 'Open my Github repository.',
+    donate: 'Support my work.',
+    email: 'Send me an email.',
+    github: 'Open my Github profile.',
+    linkedin: 'Open my LinkedIn profile.',
+    google: 'Search on Google. Usage: google [query].',
+    youtube: 'Search on Youtube. Usage: youtube [query].',
+    reddit: 'Search on Reddit. Usage: reddit [query].',
+    echo: 'Echo the input. Usage: echo [text].',
+    whoami: 'Reveals the meaning of my name.',
+    ls: 'List directory contents.',
+    cd: 'Change the shell working directory.',
+    date: 'Display the current date and time.',
+    sudo: 'Execute a command as the superuser.',
+    banner: 'Display the banner.',
+    sumfetch: 'Display summary.',
+    projects: 'Display my Github projects.',
+    quote: 'Display a random quote.',
+    readme: 'Display my Github README.',
+    weather: 'Display the weather for a city. Usage: weather [city].',
+  };
+
   var c = '';
-  for (let i = 1; i <= Object.keys(bin).sort().length; i++) {
-    if (i % 7 === 0) {
-      c += Object.keys(bin).sort()[i - 1] + '\n';
-    } else {
-      c += Object.keys(bin).sort()[i - 1] + ' ';
-    }
+  for (let i = 1; i <= Object.keys(bin).length; i++) {
+      let spaces = 16 - Object.keys(bin)[i - 1].length;
+      c += Object.keys(bin)[i - 1] + ' '.repeat(spaces) + '-\t' + commands[Object.keys(bin)[i - 1]] + '\n';
   }
   return `Welcome! Here are all the available commands:
 \n${c}\n
@@ -26,12 +49,12 @@ Type 'sumfetch' to display summary.
 export const about = async (args: string[]): Promise<string> => {
   return `Hi, I am ${config.name}. 
 Welcome to my website!
+
 More about me:
 'sumfetch' - short summary.
 'resume' - my latest resume.
 'readme' - my github readme.
-'projects' - my github projects.
-'meaning' - the meaning of my name.`;
+'projects' - my github projects.`;
 };
 
 export const resume = async (args: string[]): Promise<string> => {
@@ -39,11 +62,11 @@ export const resume = async (args: string[]): Promise<string> => {
   return 'Opening resume...';
 };
 
-// Redirection
-export const repo = async (args: string[]): Promise<string> => {
-  window.open(`${config.repo}`);
-  return 'Opening Github repository...';
-};
+// // Redirection
+// export const repo = async (args: string[]): Promise<string> => {
+//   window.open(`${config.repo}`);
+//   return 'Opening Github repository...';
+// };
 
 // Donate
 export const donate = async (args: string[]): Promise<string> => {
