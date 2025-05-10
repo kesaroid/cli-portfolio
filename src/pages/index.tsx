@@ -11,7 +11,7 @@ interface IndexPageProps {
 }
 
 const IndexPage: React.FC<IndexPageProps> = ({ inputRef }) => {
-  const containerRef = React.useRef(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const {
     history,
     command,
@@ -29,8 +29,10 @@ const IndexPage: React.FC<IndexPageProps> = ({ inputRef }) => {
   }, [init]);
 
   React.useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
     if (inputRef.current) {
-      inputRef.current.scrollIntoView();
       inputRef.current.focus({ preventScroll: true });
     }
   }, [history]);
@@ -40,22 +42,22 @@ const IndexPage: React.FC<IndexPageProps> = ({ inputRef }) => {
       <Head>
         <title>{config.title}</title>
       </Head>
-
-      <div className="p-8 overflow-hidden h-full border-2 rounded border-light-yellow dark:border-dark-yellow">
-        <div ref={containerRef} className="overflow-y-auto h-full">
-          <History history={history} />
-
-          <Input
-            inputRef={inputRef}
-            containerRef={containerRef}
-            command={command}
-            history={history}
-            lastCommandIndex={lastCommandIndex}
-            setCommand={setCommand}
-            setHistory={setHistory}
-            setLastCommandIndex={setLastCommandIndex}
-            clearHistory={clearHistory}
-          />
+      <div className="fixed inset-0 bg-light-background dark:bg-dark-background">
+        <div className="h-full border-2 rounded border-light-yellow dark:border-dark-yellow">
+          <div ref={containerRef} className="h-full overflow-y-auto overflow-x-auto bg-light-background dark:bg-dark-background p-4 sm:p-8 whitespace-pre max-w-full">
+            <History history={history} />
+            <Input
+              inputRef={inputRef}
+              containerRef={containerRef}
+              command={command}
+              history={history}
+              lastCommandIndex={lastCommandIndex}
+              setCommand={setCommand}
+              setHistory={setHistory}
+              setLastCommandIndex={setLastCommandIndex}
+              clearHistory={clearHistory}
+            />
+          </div>
         </div>
       </div>
     </>
