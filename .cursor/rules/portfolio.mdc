@@ -1,0 +1,58 @@
+### Portfolio Product Rules
+
+These rules define how the personal portfolio should behave and evolve over time. They guide features, UX, and implementation decisions.
+
+### Core Principles
+- **Personal-first, evolvable**: Content and sections change over time. Prefer data/config-driven content over hardcoded strings. Keep edits simple and low-risk.
+- **Fast and accessible**: Prioritize performance, keyboard navigation, and visual clarity.
+- **Responsive by design**: Works great on mobile and desktop without manual zooming or horizontal scrolling.
+
+### Content & Structure
+- **Config-driven content**: Put editable text, links, social handles, and metadata in `config.json` (or a dedicated config module). Avoid hardcoding portfolio content in React components.
+- **Stable URLs and commands**: Pages and CLI commands should remain stable. Add new ones without breaking existing ones.
+- **Extensibility**: New sections (e.g., talks, projects, writing) must be addable without refactoring the app shell.
+
+### Responsiveness & Initial Viewport Handling
+- **Initial viewport capture**: On first app load in the browser, capture `window.innerWidth` and `window.innerHeight` and derive a `layoutProfile` (e.g., `small`, `medium`, `large`).
+  - Persist the `layoutProfile` and `initialViewport` in a React context or global store.
+  - Optionally persist to `localStorage` to keep consistent sizing across same-device visits.
+- **Adjustments based on profile**: Use the `layoutProfile` to set sizing tokens (e.g., font size, line length, padding, grid columns) via CSS variables or Tailwind responsive utilities.
+- **Resize behavior**: Do not continuously reflow on minor resizes. Recalculate only when crossing breakpoint thresholds or on orientation changes.
+- **Supported sizes**: Must be fully usable from 320×640 up to 1920×1200. No horizontal scroll on common viewports.
+- **Terminal UI specifics**: Choose an initial font size and line-length that avoid wrapping overflow on the initial viewport, while keeping a comfortable number of visible lines.
+
+### Accessibility (a11y)
+- **Keyboard-first**: All interactive elements are reachable via keyboard. Visible focus states are required.
+- **Color contrast**: Meet WCAG AA contrast where possible, even across themes.
+- **Motion preferences**: Respect `prefers-reduced-motion` and reduce non-essential animations.
+- **Text scaling**: Do not break layout when user zooms text up to 200%.
+
+### Performance
+- **Budget**: Aim for <1s TTI on a typical 4G connection for the landing route, with no blocking third-party scripts.
+- **Fonts**: Use `font-display: swap`. Only load required weights/styles. Avoid large, render-blocking font files.
+- **Images**: Use modern formats and correct sizes. Avoid layout shifts.
+
+### CLI/Command Behavior
+- **Backwards-compatible commands**: Existing commands remain valid. New commands are additive.
+- **Helpful errors**: Unknown commands return a friendly message and suggest close matches.
+- **No destructive side effects**: Commands should not perform actions that affect user system state.
+
+### Theming
+- **Theme safety**: Theme palettes must maintain legibility and contrast. Avoid colors that reduce readability in terminal UI.
+- **Consistent tokens**: Prefer CSS variables or Tailwind tokens for spacing, sizing, and colors to keep themes consistent.
+
+### Implementation Guidance
+- **SSR safety**: Guard all `window`/`document` usage. Avoid hydration mismatches in Next.js.
+- **State management**: Provide a `ViewportContext` (or similar) that exposes `initialViewport`, `layoutProfile`, and derived sizing tokens to components.
+- **Styling**: Prefer Tailwind responsive utilities combined with a small set of CSS variables for dynamic sizing driven by `layoutProfile`.
+
+### QA Criteria (Definition of Done)
+- **Viewports**: Validate at least at 375×812 (mobile) and 1440×900 (desktop). No horizontal scroll; comfortable spacing.
+- **Keyboard/a11y**: Tab through primary flows; visible focus; no keyboard traps.
+- **Performance**: Quick interactive feel; no obvious layout shifts; fonts swap correctly.
+- **Stability**: No console errors; clean build and lint pass.
+
+### Non-Goals
+- **No invasive tracking**: Avoid analytics that compromise privacy.
+- **No device-specific hacks**: Prefer standards-based responsive behavior over UA sniffing.
+

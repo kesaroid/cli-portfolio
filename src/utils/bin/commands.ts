@@ -8,17 +8,12 @@ export const help = async (args: string[]): Promise<string> => {
   // const commands = Object.keys(bin).join(', ');
   const commands = {
     help: 'Display this help message.',
-    about: 'Display information about this website.',
     resume: 'Open my resume.',
     // repo: 'Open my Github repository.',
     donate: 'Support my work.',
     email: 'Send me an email.',
     github: 'Open my Github profile.',
     linkedin: 'Open my LinkedIn profile.',
-    google: 'Search on Google. Usage: google [query].',
-    youtube: 'Search on Youtube. Usage: youtube [query].',
-    reddit: 'Search on Reddit. Usage: reddit [query].',
-    echo: 'Echo the input. Usage: echo [text].',
     whoami: 'Reveals the meaning of my name.',
     ls: 'List directory contents.',
     cd: 'Change the shell working directory.',
@@ -45,17 +40,7 @@ Type 'sumfetch' to display summary.
 `;
 };
 
-// About
-export const about = async (args: string[]): Promise<string> => {
-  return `Hi, I am ${config.name}. 
-Welcome to my website!
-
-More about me:
-'sumfetch' - short summary.
-'resume' - my latest resume.
-'readme' - my github readme.
-'projects' - my github projects.`;
-};
+// 
 
 export const resume = async (args: string[]): Promise<string> => {
   window.open(`${config.resume_url}`);
@@ -95,26 +80,9 @@ export const linkedin = async (args: string[]): Promise<string> => {
   return 'Opening linkedin...';
 };
 
-// Search
-export const google = async (args: string[]): Promise<string> => {
-  window.open(`https://google.com/search?q=${args.join(' ')}`);
-  return `Searching google for ${args.join(' ')}...`;
-};
+// 
 
-export const youtube = async (args: string[]): Promise<string> => {
-  window.open(`https://www.youtube.com/results?search_query=${args.join(' ')}`);
-  return `Searching youtube for ${args.join(' ')}...`;
-}
-
-export const reddit = async (args: string[]): Promise<string> => {
-  window.open(`https://www.reddit.com/search/?q=${args.join(' ')}`);
-  return `Searching reddit for ${args.join(' ')}...`;
-};
-
-// Typical linux commands
-export const echo = async (args: string[]): Promise<string> => {
-  return args.join(' ');
-};
+// 
 
 export const whoami = async (args: string[]): Promise<string> => {
   return `
