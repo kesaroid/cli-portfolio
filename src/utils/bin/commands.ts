@@ -22,7 +22,6 @@ export const help = async (args: string[]): Promise<string> => {
     banner: 'Display the banner.',
     sumfetch: 'Display summary.',
     projects: 'Display my Github projects.',
-    quote: 'Display a random quote.',
     readme: 'Display my Github README.',
     weather: 'Display the weather for a city. Usage: weather [city].',
   };
