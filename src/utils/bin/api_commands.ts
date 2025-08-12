@@ -4,6 +4,7 @@ import { getProjects } from '../api';
 import { getQuote } from '../api';
 import { getReadme } from '../api';
 import { getWeather } from '../api';
+import { EMBED_WEBSITE_IMAGE_CLASSES } from '../constants';
 
 export const projects = async (args: string[]): Promise<string> => {
   const projects = await getProjects();
@@ -56,8 +57,18 @@ export const projects = async (args: string[]): Promise<string> => {
     })
     .join('');
 
+  // Embedded image link for 'wang' before the projects grid
+  // Ensure the image exists at public/assets/wang.png
+  const wangLink = `<div class="mb-3 sm:mb-4">
+    <a href="https://www.thats-my-quant.com/" target="_blank" rel="noopener noreferrer" class="inline-block">
+      <img src="/assets/wang.png" alt="wang" class="${EMBED_WEBSITE_IMAGE_CLASSES}" />
+    </a>
+  </div>`;
+
   // Responsive grid: 2 columns on mobile, 5 columns on desktop
-  return `<span class="grid grid-cols-2 md:grid-cols-5 auto-rows-fr gap-3 sm:gap-4 w-full whitespace-normal">${cards}</span>`;
+  const grid = `<span class="grid grid-cols-2 md:grid-cols-5 auto-rows-fr gap-3 sm:gap-4 w-full whitespace-normal">${cards}</span>`;
+
+  return `${wangLink}${grid}`;
 };
 
 export const quote = async (args: string[]): Promise<string> => {
