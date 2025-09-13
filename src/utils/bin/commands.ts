@@ -2,13 +2,16 @@
 
 import * as bin from './index';
 import config from '../../../config.json';
+import React from 'react';
+import ResumeGraph from '../../components/ResumeGraph';
+import resumeData from '../../../public/assets/resume.json';
 
 // Help
 export const help = async (args: string[]): Promise<string> => {
   // const commands = Object.keys(bin).join(', ');
   const commands = {
     help: 'Display this help message.',
-    resume: 'Open my resume.',
+    resume: 'Show interactive resume graph.',
     // repo: 'Open my Github repository.',
     donate: 'Support my work.',
     email: 'Send me an email.',
@@ -41,9 +44,8 @@ Type 'sumfetch' to display summary.
 
 // 
 
-export const resume = async (args: string[]): Promise<string> => {
-  window.open(`${config.resume_url}`);
-  return 'Opening resume...';
+export const resume = async (args: string[]): Promise<any> => {
+  return React.createElement(ResumeGraph, { data: (resumeData as any) });
 };
 
 // // Redirection

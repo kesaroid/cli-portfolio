@@ -1,9 +1,10 @@
 import React from 'react';
+import type { ReactNode } from 'react';
 import * as bin from './bin';
 
 export const shell = async (
   command: string,
-  setHistory: (value: string) => void,
+  setHistory: (value: string | ReactNode) => void,
   clearHistory: () => void,
   setCommand: React.Dispatch<React.SetStateAction<string>>,
 ) => {

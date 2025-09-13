@@ -1,0 +1,135 @@
+{
+  "root": {
+    "id": "root",
+    "label": "Resume graph",
+    "children": [
+      {
+        "id": "contact",
+        "label": "Contact Information",
+        "children": [
+          { "id": "phone", "label": "Phone: +1 (321) 440-2157" },
+          { "id": "email", "label": "Email: kesartn@gmail.com", "href": "mailto:kesartn@gmail.com" },
+          { "id": "location", "label": "Location: Orlando, FL" },
+          { "id": "website", "label": "Website: kesaroid.com", "href": "https://kesaroid.com" }
+        ]
+      },
+      {
+        "id": "experience",
+        "label": "Experience",
+        "children": [
+          {
+            "id": "brambles",
+            "label": "Chep - A Brambles company (Machine Learning Engineer) 08/20 – Present",
+            "details": [
+              "Manage a team to research and develop AIRS (AI Repair Supervision) using 3D Pose Estimation and Temporal Action recognition, saving $80M.",
+              "Develop PND (Protruding Nail Detection) models achieving 95% precision.",
+              "Create a forecasting tool using FMS time-series data to increase MTBF by 40%.",
+              "Design and scale SafetyML with model quantization for NVIDIA Jetson Xavier NX, deployed in 75+ locations."
+            ]
+          },
+          {
+            "id": "xenon",
+            "label": "Xenon Automotive (Machine Learning Engineer) 01/19 – 08/19",
+            "details": [
+              "Trained Mask-RCNN models for automotive flaw detection with 90% IOU.",
+              "Developed monocular depth-estimation models to assess damage severity.",
+              "Built outlier detection using Autoencoders and OC-SVM, and a license plate detector using GCP."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "education",
+        "label": "Education",
+        "children": [
+          {
+            "id": "ms",
+            "label": "M.S. Computer Science, University of Central Florida (08/19 – 08/21)",
+            "details": [
+              "Specialization in Computer Vision, NLP, and AI.",
+              "Graduate Teaching Assistant for CAP4453 - Robot Vision.",
+              "Developed a spatio-temporal knowledge representation graph achieving SOTA."
+            ]
+          },
+          {
+            "id": "be",
+            "label": "B.E. Electronics & Communication, Dayananda Sagar College of Engineering (06/14 – 06/18)",
+            "details": [
+              "Focus on Embedded systems and Digital Signal Processing.",
+              "ResNet-based Glaucoma diagnosis on Raspberry Pi, published in IEEE ICGIoT.",
+              "Sentiment Analysis of Kannada Movie Reviews published in JASC."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "certs",
+        "label": "Certifications & Activities",
+        "children": [
+          { "id": "genai", "label": "Lead cohort of GenAI community at Brambles" },
+          { "id": "cs50", "label": "CS50 by HarvardX" },
+          { "id": "mlng", "label": "Machine Learning by Andrew NG" },
+          { "id": "robo", "label": "Head coordinator of Robotics for RoboFeast’17" },
+          { "id": "nature", "label": "Member of Wildlife Aware Nature Club" },
+          { "id": "eip", "label": "Top Scorer in EIP 3.0" }
+        ]
+      },
+      {
+        "id": "skills",
+        "label": "Skills",
+        "children": [
+          { "id": "domains", "label": "Domains", "children": [
+              { "id": "cv", "label": "Computer Vision" },
+              { "id": "nlp", "label": "NLP" },
+              { "id": "mlops", "label": "MLOps" }
+            ]
+          },
+          { "id": "pl", "label": "Programming", "children": [
+            { "id": "python", "label": "Python" },
+            { "id": "sql", "label": "SQL" },
+            { "id": "r", "label": "R" }
+          ] },
+          { "id": "frameworks", "label": "ML Frameworks", "children": [
+            { "id": "pytorch", "label": "PyTorch" },
+            { "id": "tensorflow", "label": "TensorFlow" },
+            { "id": "keras", "label": "Keras" },
+            { "id": "scikit-learn", "label": "Scikit-Learn" },
+            { "id": "cuda", "label": "CUDA" }
+          ] },
+          { "id": "libs", "label": "Libraries", "children": [
+            { "id": "numpy", "label": "NumPy" },
+            { "id": "opencv", "label": "OpenCV" },
+            { "id": "ffmpeg", "label": "ffmpeg" }
+          ] },
+          { "id": "db", "label": "Databases", "children": [
+            { "id": "mongodb", "label": "MongoDB" },
+            { "id": "mysql", "label": "MySQL" },
+            { "id": "postgresql", "label": "PostgreSQL" },
+            { "id": "databricks", "label": "Databricks" },
+            { "id": "apache-spark", "label": "Apache Spark" }
+          ] },
+          { "id": "deploy", "label": "Deployment", "children": [
+            { "id": "tensorrt", "label": "TensorRT" },
+            { "id": "torchserve", "label": "TorchServe" },
+            { "id": "onnx", "label": "ONNX" },
+            { "id": "triton", "label": "Triton" }
+          ] },
+          { "id": "mlops", "label": "MLOps", "children": [
+            { "id": "mlflow", "label": "MLFlow" },
+            { "id": "dvc", "label": "DVC" },
+            { "id": "docker", "label": "Docker" },
+            { "id": "ray", "label": "Ray" },
+            { "id": "grafana", "label": "Grafana" },
+            { "id": "kubernetes", "label": "Kubernetes" }
+          ] },
+          { "id": "cloud", "label": "Cloud & Version Control", "children": [
+            { "id": "aws", "label": "AWS" },
+            { "id": "gcp", "label": "GCP" },
+            { "id": "azure", "label": "Azure" },
+            { "id": "git", "label": "Git" }
+          ] }
+        ]
+      }
+    ]
+  }
+}

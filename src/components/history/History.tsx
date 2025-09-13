@@ -17,11 +17,15 @@ export const History: React.FC<{ history: Array<HistoryInterface> }> = ({
             <div className="flex-grow">{entry.command}</div>
           </div>
 
-          <p
-            className="whitespace-pre mb-2"
-            style={{ lineHeight: 'normal' }}
-            dangerouslySetInnerHTML={{ __html: entry.output }}
-          />
+          {typeof entry.output === 'string' ? (
+            <p
+              className="whitespace-pre mb-2"
+              style={{ lineHeight: 'normal' }}
+              dangerouslySetInnerHTML={{ __html: entry.output }}
+            />
+          ) : (
+            <div className="mb-2">{entry.output}</div>
+          )}
         </div>
       ))}
     </>
