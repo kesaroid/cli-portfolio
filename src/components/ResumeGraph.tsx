@@ -6,6 +6,8 @@ type ResumeNode = {
   children?: ResumeNode[];
   href?: string;
   details?: string[];
+  // Two values only: [start, end]
+  timeline?: [string, string];
 };
 
 export type ResumeData = {
@@ -44,6 +46,7 @@ const Branch: React.FC<{
   const [open, setOpen] = React.useState<boolean>(depth === 0);
   const hasChildren = (node.children?.length ?? 0) > 0;
   const hasDetails = (node.details?.length ?? 0) > 0;
+  const hasTimeline = Array.isArray(node.timeline) && node.timeline.length === 2;
 
   const onClick = () => {
     if (node.href) {
@@ -58,6 +61,11 @@ const Branch: React.FC<{
     <div className="flex flex-col">
       <div className="flex flex-row items-center cursor-pointer group select-none" onClick={onClick}>
         <NodeBadge label={node.label} clickable={!!node.href} leaf={!hasChildren && !hasDetails} />
+        {hasTimeline && open && (
+          <span className="ml-2 px-2 py-0.5 rounded-full border border-light-gray dark:border-dark-gray text-xs text-light-gray dark:text-dark-gray bg-light-background dark:bg-dark-background">
+            {node.timeline![0]} — {node.timeline![1]}
+          </span>
+        )}
       </div>
 
       {(hasChildren || hasDetails) && open && (
@@ -72,6 +80,8 @@ const Branch: React.FC<{
           ))}
         </div>
       )}
+
+      {false && hasTimeline}
     </div>
   );
 };

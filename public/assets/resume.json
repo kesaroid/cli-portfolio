@@ -19,7 +19,8 @@
         "children": [
           {
             "id": "brambles",
-            "label": "Chep - A Brambles company (Machine Learning Engineer) 08/20 – Present",
+            "label": "Chep - A Brambles company (Machine Learning Engineer)",
+            "timeline": ["August 2020", "today"],
             "details": [
               "Manage a team to research and develop AIRS (AI Repair Supervision) using 3D Pose Estimation and Temporal Action recognition, saving $80M.",
               "Develop PND (Protruding Nail Detection) models achieving 95% precision.",
@@ -29,7 +30,8 @@
           },
           {
             "id": "xenon",
-            "label": "Xenon Automotive (Machine Learning Engineer) 01/19 – 08/19",
+            "label": "Xenon Automotive (Machine Learning Engineer)",
+            "timeline": ["January 2019", "August 2019"],
             "details": [
               "Trained Mask-RCNN models for automotive flaw detection with 90% IOU.",
               "Developed monocular depth-estimation models to assess damage severity.",
@@ -44,7 +46,8 @@
         "children": [
           {
             "id": "ms",
-            "label": "M.S. Computer Science, University of Central Florida (08/19 – 08/21)",
+            "label": "M.S. Computer Science, University of Central Florida",
+            "timeline": ["August 2019", "August 2021"],
             "details": [
               "Specialization in Computer Vision, NLP, and AI.",
               "Graduate Teaching Assistant for CAP4453 - Robot Vision.",
@@ -53,7 +56,8 @@
           },
           {
             "id": "be",
-            "label": "B.E. Electronics & Communication, Dayananda Sagar College of Engineering (06/14 – 06/18)",
+            "label": "B.E. Electronics & Communication, Dayananda Sagar College of Engineering",
+            "timeline": ["June 2014", "June 2018"],
             "details": [
               "Focus on Embedded systems and Digital Signal Processing.",
               "ResNet-based Glaucoma diagnosis on Raspberry Pi, published in IEEE ICGIoT.",
