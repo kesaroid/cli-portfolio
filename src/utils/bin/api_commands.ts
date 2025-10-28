@@ -2,6 +2,9 @@
 
 import { getProjects } from '../api';
 import { getReadme } from '../api';
+import React from 'react';
+import Readme from '../../components/Readme';
+import { renderMarkdown } from '../markdown';
 import { getWeather } from '../api';
 import { EMBED_WEBSITE_IMAGE_CLASSES } from '../constants';
 
@@ -72,10 +75,15 @@ export const projects = async (args: string[]): Promise<string> => {
 
 // quote command removed
 
-export const readme = async (args: string[]): Promise<string> => {
-  const readme = await getReadme();
-  return `Opening GitHub README...\n
-  ${readme}`;
+export const readme = async (args: string[]): Promise<React.ReactNode> => {
+  const md = await getReadme();
+  const html = renderMarkdown(md);
+  return (
+    <div className="space-y-2">
+      <div className="text-xs uppercase tracking-wide text-light-gray dark:text-dark-gray">Opening GitHub README...</div>
+      <Readme html={html} />
+    </div>
+  );
 };
 
 export const weather = async (args: string[]): Promise<string> => {
