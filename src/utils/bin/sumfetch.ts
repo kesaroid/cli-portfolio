@@ -12,10 +12,10 @@ const sumfetch = async (args: string[]): Promise<string> => {
   MML      )MMMD   .AMMMMMMMMMMMMMMMMMMD.
   VMMM    .AMMY'  ,AMMMMMMMMMMMMMMMMMMMMD
   \VMM, AMMMV'  ,AMMMMMMMMMMMMMMMMMMMMMMM,                ,
-   VMMMmMMV'  ,AMY~~''  'MMMMMMMMMMMM' '~~             ,aMM                  sumfetch: summary display
+  VMMMmMMV'  ,AMY~~''  'MMMMMMMMMMMM' '~~             ,aMM                  <u><a href="https://github.com/kesaroid/summary/blob/7966174b0cd808701ab44dc27d7ed4cf073e4ae0/README.md" target="_blank">About Me</a></u>
     YMMMM'   AMM'        'VMMMMMMMMP'_              A,aMMMM                 -----------
     AMMM'    VMMA. YVmmmMMMMMMMMMMML MmmmY          MMMMMMM                 -----------
-   ,AMMA   _,HMMMMmdMMMMMMMMMMMMMMMML'VMV'         ,MMMMMMM                  ABOUT
+   ,AMMA   _,HMMMMmdMMMMMMMMMMMMMMMML'VMV'         ,MMMMMMM                 
    AMMMA _'MMMMMMMMMMMMMMMMMMMMMMMMMMA '           MMMMMMMM                  ${config.name}
   ,AMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMa      ,,,    MMMMMMM                  ${config.subtitle}
   AMMMMMMMMM'~'YMMMMMMMMMMMMMMMMMMMMMMA    ,AMMV    MMMMMMM                 
@@ -39,3 +39,36 @@ const sumfetch = async (args: string[]): Promise<string> => {
 };
 
 export default sumfetch;
+
+const ascii_lion = `                                                  
+         ,aodObo,
+         ,AMMMMP~~~~
+      ,MMMMMMMMA.
+    ,M;'      YV'
+   AM' ,OMA,
+  AM|    ~VMM,.      .,ama,____,amma,..
+  MML      )MMMD   .AMMMMMMMMMMMMMMMMMMD.
+  VMMM    .AMMY'  ,AMMMMMMMMMMMMMMMMMMMMD
+  \VMM, AMMMV'  ,AMMMMMMMMMMMMMMMMMMMMMMM,                
+  VMMMmMMV'  ,AMY~~''  'MMMMMMMMMMMM' '~~             
+    YMMMM'   AMM'        'VMMMMMMMMP'_              
+    AMMM'    VMMA. YVmmmMMMMMMMMMMML MmmmY          
+   ,AMMA   _,HMMMMmdMMMMMMMMMMMMMMMML'VMV'         
+   AMMMA _'MMMMMMMMMMMMMMMMMMMMMMMMMMA '           
+  ,AMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMa      ,,,    
+  AMMMMMMMMM'~'YMMMMMMMMMMMMMMMMMMMMMMA    ,AMMV    
+  VMV MMMMMV    YMMMMMMMMMMMMMMMMMMMMMY    VMMY'  
+   V  MMMM'       YMMMMMMMV.~~~~~~~~~,aado, V''   
+     aMMMMmv        YMMMMMMMm,    ,/AMMMMMA,      
+     VMMMMM,,v       YMMMMMMMMMo oMMMMMMMMM'    a, 
+      YMMMMMY'        YMMMMMMMY'  YMMMMMMMY     MMm
+      AMMMMM  ,        ~~~~~,Kesara,~~~~~~      MMM
+        YMMMb,d'         dMMMMMMMMMMMMMD,   a,, AMM
+         YMMMMM, A       YMMMMMMMMMMMMMY   ,MMMMMMMM
+        AMMMMMMMMM         ~~~~'   ~~~~'   AMMMMMMMM
+         VMMMMMM'  ,A,                  ,,AMMMMMMMMM
+      ,AMMMMMMMMMMMMMMA,       ,aAMMMMMMMMMMMMMMMMMM
+    ,AMMMMMMMMMMMMMMMMMMA,    AMMMMMMMMMMMMMMMMMMMMM
+  ,AMMMMMMMMMMMMMMMMMMMMMA   AMMMMMMMMMMMMMMMMMMMMMM
+ AMMMMMMMMMMMMMMMMMMMMMMMMAaAMMMMMMMMMMMMMMMMMMMMMMM
+ `;
