@@ -12,7 +12,7 @@ const sumfetch = async (args: string[]): Promise<string> => {
   MML      )MMMD   .AMMMMMMMMMMMMMMMMMMD.
   VMMM    .AMMY'  ,AMMMMMMMMMMMMMMMMMMMMD
   \VMM, AMMMV'  ,AMMMMMMMMMMMMMMMMMMMMMMM,                ,
-  VMMMmMMV'  ,AMY~~''  'MMMMMMMMMMMM' '~~             ,aMM                  <u><a href="https://github.com/kesaroid/summary/blob/7966174b0cd808701ab44dc27d7ed4cf073e4ae0/README.md" target="_blank">About Me</a></u>
+  VMMMmMMV'  ,AMY~~''  'MMMMMMMMMMMM' '~~             ,aMM                   <u><a href="https://github.com/kesaroid/summary/blob/7966174b0cd808701ab44dc27d7ed4cf073e4ae0/README.md" target="_blank">About Me</a></u>
     YMMMM'   AMM'        'VMMMMMMMMP'_              A,aMMMM                 -----------
     AMMM'    VMMA. YVmmmMMMMMMMMMMML MmmmY          MMMMMMM                 -----------
    ,AMMA   _,HMMMMmdMMMMMMMMMMMMMMMML'VMV'         ,MMMMMMM                 

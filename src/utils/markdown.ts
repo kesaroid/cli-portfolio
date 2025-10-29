@@ -53,8 +53,8 @@ export const renderMarkdown = (md: string): string => {
         .replace(/\*([^*]+)\*/g, '<em>$1</em>')
         // links [text](url)
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="underline decoration-dotted hover:decoration-solid text-light-blue dark:text-dark-blue">$1<\/a>')
-        // finally escape remaining raw angle brackets
-        .replace(/<(?!\/?(h[1-6]|hr|blockquote|li|strong|em|a|code|pre|span|div|p)\b)[^>]*>/g, (m) => escapeHtml(m));
+        // finally escape remaining raw angle brackets except allowed tags
+        .replace(/<(?!\/?(h[1-6]|hr|blockquote|li|strong|em|a|code|pre|span|div|p|details|summary|br)\b)[^>]*>/g, (m) => escapeHtml(m));
     })
     .join('\n');
 
@@ -70,11 +70,21 @@ export const renderMarkdown = (md: string): string => {
     .map((block) => {
       const trimmed = block.trim();
       if (!trimmed) return '';
-      if (/^\s*<\/?(h[1-6]|ul|li|pre|blockquote|hr)\b/.test(trimmed)) return trimmed;
+      if (/^\s*<\/?(h[1-6]|ul|li|pre|blockquote|hr|details|summary)\b/.test(trimmed)) return trimmed;
       if (trimmed.includes('§§CODEBLOCK_')) return trimmed; // codeblocks handled later
       return `<p class="my-2 leading-relaxed">${trimmed}</p>`;
     })
     .join('\n');
+
+  // Style details/summary blocks and content area
+  text = text
+    // Ensure opening tag has classes
+    .replace(/<details(\s[^>]*)?>/g, '<details class="mb-2 border border-light-gray dark:border-dark-gray rounded-md"$1>')
+    // Style summary and open a content wrapper after it
+    .replace(/<summary(\s[^>]*)?>/g, '<summary class="cursor-pointer select-none px-3 py-2 bg-light-foreground/10 dark:bg-dark-foreground/10 text-light-foreground dark:text-dark-foreground rounded-t-md"$1>')
+    .replace(/<\/summary>\n?/g, '</summary><div class="px-3 py-2 space-y-2">')
+    // Close content wrapper before closing details
+    .replace(/<\/details>/g, '</div></details>');
 
   // Restore code blocks
   text = text.replace(/§§CODEBLOCK_(\d+)§§/g, (_m, idx) => codeBlocks[Number(idx)] || '');
