@@ -42,9 +42,22 @@ Type 'sumfetch' to display summary.
 `;
 };
 
-// 
+const RESUME_UNAVAILABLE_MSG = 'Contact the author for the latest resume';
+
+const isResumeUrlAvailable = async (): Promise<boolean> => {
+  try {
+    const res = await fetch(config.resume_url);
+    return res.ok;
+  } catch {
+    return false;
+  }
+};
 
 export const resume = async (args: string[]): Promise<any> => {
+  const available = await isResumeUrlAvailable();
+  if (!available) {
+    return RESUME_UNAVAILABLE_MSG;
+  }
   return React.createElement(ResumeGraph, { data: (resumeData as any) });
 };
 

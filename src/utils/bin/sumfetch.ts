@@ -1,7 +1,22 @@
 import config from '../../../config.json';
 
+const RESUME_UNAVAILABLE_MSG = 'Contact the author for the latest resume';
+
+const isResumeUrlAvailable = async (): Promise<boolean> => {
+  try {
+    const res = await fetch(config.resume_url);
+    return res.ok;
+  } catch {
+    return false;
+  }
+};
+
 const sumfetch = async (args: string[]): Promise<string> => {
   if (config.ascii === 'kesaroid') {
+    const resumeAvailable = await isResumeUrlAvailable();
+    const resumeLine = resumeAvailable
+      ? `  VMV MMMMMV    YMMMMMMMMMMMMMMMMMMMMMY    VMMY'  adMMMMMMM                 \uF757 <u><a href="${config.resume_url}" target="_blank">Resume</a></u>`
+      : `  VMV MMMMMV    YMMMMMMMMMMMMMMMMMMMMMY    VMMY'  adMMMMMMM                 ${RESUME_UNAVAILABLE_MSG}`;
     return `                                                  
          ,aodObo,
          ,AMMMMP~~~~
@@ -18,9 +33,9 @@ const sumfetch = async (args: string[]): Promise<string> => {
    ,AMMA   _,HMMMMmdMMMMMMMMMMMMMMMML'VMV'         ,MMMMMMM                 
    AMMMA _'MMMMMMMMMMMMMMMMMMMMMMMMMMA '           MMMMMMMM                  ${config.name}
   ,AMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMa      ,,,    MMMMMMM                  ${config.subtitle}
-  AMMMMMMMMM'~'YMMMMMMMMMMMMMMMMMMMMMMA    ,AMMV    MMMMMMM                 
-  VMV MMMMMV    YMMMMMMMMMMMMMMMMMMMMMY    VMMY'  adMMMMMMM                  <u><a href="${config.resume_url}" target="_blank">Resume</a></u>
-   V  MMMM'       YMMMMMMMV.~~~~~~~~~,aado, V''   MMMMMMMMM                 
+  AMMMMMMMMM'~'YMMMMMMMMMMMMMMMMMMMMMMA    ,AMMV    MMMMMMM 
+${resumeLine}
+   V  MMMM'       YMMMMMMMV.~~~~~~~~~,aado, V''   MMMMMMMMM
      aMMMMmv        YMMMMMMMm,    ,/AMMMMMA,      YMMMMMMMM                 -----------
      VMMMMM,,v       YMMMMMMMMMo oMMMMMMMMM'    a, YMMMMMMM                 
       YMMMMMY'        YMMMMMMMY'  YMMMMMMMY     MMmMMMMMMMM                  CONTACT                  

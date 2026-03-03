@@ -6,8 +6,8 @@ interface CommandTilesProps {
 
 const commands = [
   { name: 'sumfetch', description: 'Display summary', icon: '🦁' },
-  { name: 'resume', description: 'View resume', icon: '📜' },
-  { name: 'readme', description: 'About me', icon: '📁' },
+  { name: 'resume', description: 'View resume', icon: '📊' },
+  { name: 'readme', description: 'About me', icon: '📜' },
   { name: 'projects', description: 'My projects', icon: '🚀' },
 ];
 
