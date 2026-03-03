@@ -44,9 +44,7 @@ Based on M4TT72's awesome [Terminal](https://github.com/m4tt72/terminal).
 
 High Priority features:
 - Create a mobile-friendly branch and create one
-- Add dynamic mindmap when resume is clicked (dir structure)
-- Add timeline for experience and education
 
 Medium Priority features:
 - Add socials and make it more personal
-  
+- Add more API's from apivault

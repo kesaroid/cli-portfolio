@@ -55,19 +55,9 @@ const IndexPage: React.FC<IndexPageProps> = ({ inputRef }) => {
     }
     
     setCommand('');
-    
-    // Scroll to bottom
-    setTimeout(() => {
-      if (containerRef.current) {
-        containerRef.current.scrollTo(0, containerRef.current.scrollHeight);
-      }
-    }, 100);
   }, [setCommand, setHistory, clearHistory]);
 
   React.useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.scrollTop = containerRef.current.scrollHeight;
-    }
     if (inputRef.current) {
       inputRef.current.focus({ preventScroll: true });
     }

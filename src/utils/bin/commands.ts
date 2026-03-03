@@ -58,7 +58,7 @@ export const resume = async (args: string[]): Promise<any> => {
   if (!available) {
     return RESUME_UNAVAILABLE_MSG;
   }
-  return React.createElement(ResumeGraph, { data: (resumeData as any) });
+  return React.createElement(ResumeGraph, { data: (resumeData as any), resumeUrl: config.resume_url });
 };
 
 // // Redirection
