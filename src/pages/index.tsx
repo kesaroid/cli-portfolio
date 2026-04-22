@@ -5,7 +5,7 @@ import { Input } from '../components/input';
 import { useHistory } from '../components/history/hook';
 import { History } from '../components/history/History';
 import { banner } from '../utils/bin';
-import { CommandTiles } from '../components/CommandTiles';
+import { AppDock } from '../components/AppDock';
 import * as bin from '../utils/bin';
 
 interface IndexPageProps {
@@ -30,32 +30,35 @@ const IndexPage: React.FC<IndexPageProps> = ({ inputRef }) => {
     init();
   }, [init]);
 
-  const handleCommandClick = React.useCallback(async (cmd: string) => {
-    // Set command first so it appears in history correctly
-    setCommand(cmd);
-    
-    // Wait for state update
-    await new Promise(resolve => setTimeout(resolve, 0));
-    
-    // Execute the command
-    const args = cmd.split(' ');
-    const commandName = args[0].toLowerCase();
-    
-    if (commandName === 'clear') {
-      clearHistory();
-    } else if (bin[commandName]) {
-      try {
-        const output = await bin[commandName](args.slice(1));
-        setHistory(output);
-      } catch (error) {
-        setHistory(`Error executing command: ${cmd}`);
+  const handleCommandClick = React.useCallback(
+    async (cmd: string) => {
+      // Set command first so it appears in history correctly
+      setCommand(cmd);
+
+      // Wait for state update
+      await new Promise((resolve) => setTimeout(resolve, 0));
+
+      // Execute the command
+      const args = cmd.split(' ');
+      const commandName = args[0].toLowerCase();
+
+      if (commandName === 'clear') {
+        clearHistory();
+      } else if (bin[commandName]) {
+        try {
+          const output = await bin[commandName](args.slice(1));
+          setHistory(output);
+        } catch (error) {
+          setHistory(`Error executing command: ${cmd}`);
+        }
+      } else {
+        setHistory(`shell: command not found: ${commandName}`);
       }
-    } else {
-      setHistory(`shell: command not found: ${commandName}`);
-    }
-    
-    setCommand('');
-  }, [setCommand, setHistory, clearHistory]);
+
+      setCommand('');
+    },
+    [setCommand, setHistory, clearHistory],
+  );
 
   React.useEffect(() => {
     if (inputRef.current) {
@@ -69,10 +72,13 @@ const IndexPage: React.FC<IndexPageProps> = ({ inputRef }) => {
         <title>{config.title}</title>
       </Head>
       <div className="fixed inset-0 bg-light-background dark:bg-dark-background">
-        <div className="h-full border-2 rounded border-light-yellow dark:border-dark-yellow">
-          <div ref={containerRef} className="h-full overflow-y-auto overflow-x-auto bg-light-background dark:bg-dark-background p-4 sm:p-8 whitespace-pre max-w-full">
+        <div className="relative h-full border-2 rounded border-light-yellow dark:border-dark-yellow">
+          <AppDock onCommandClick={handleCommandClick} />
+          <div
+            ref={containerRef}
+            className="h-full overflow-y-auto overflow-x-auto bg-light-background dark:bg-dark-background whitespace-pre max-w-full p-4 pb-44 sm:px-8 sm:pt-8 sm:pb-44 md:p-8 md:pl-14"
+          >
             <History history={history} />
-            {history.length === 1 && <CommandTiles onCommandClick={handleCommandClick} />}
             <Input
               inputRef={inputRef}
               containerRef={containerRef}
