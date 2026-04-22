@@ -76,7 +76,7 @@ const IndexPage: React.FC<IndexPageProps> = ({ inputRef }) => {
           <AppDock onCommandClick={handleCommandClick} />
           <div
             ref={containerRef}
-            className="h-full overflow-y-auto overflow-x-auto bg-light-background dark:bg-dark-background whitespace-pre max-w-full p-4 pb-44 sm:px-8 sm:pt-8 sm:pb-44 md:p-8 md:pl-14"
+            className="h-full overflow-y-auto overflow-x-auto bg-light-background dark:bg-dark-background whitespace-pre max-w-full p-4 pb-44 sm:px-8 sm:pt-8 sm:pb-44 md:p-8 md:pl-16"
           >
             <History history={history} />
             <Input
