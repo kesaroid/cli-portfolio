@@ -6,40 +6,76 @@ import React from 'react';
 import ResumeGraph from '../../components/ResumeGraph';
 import resumeData from '../../../public/assets/resume.json';
 
+const COMMAND_DESCRIPTIONS: Record<string, string> = {
+  help: 'Display this help message.',
+  resume: 'Show interactive resume graph.',
+  donate: 'Support my work.',
+  email: 'Send me an email.',
+  github: 'Open my Github profile.',
+  linkedin: 'Open my LinkedIn profile.',
+  whoami: 'Reveals the meaning of my name.',
+  ls: 'List directory contents.',
+  cd: 'Change the shell working directory.',
+  date: 'Display the current date and time.',
+  sudo: 'Execute a command as the superuser.',
+  banner: 'Display the banner.',
+  projects: 'Display my Github projects.',
+  readme: 'Display my Github README.',
+  weather: 'Display the weather for a city.',
+};
+
+const HELP_FOOTER = `[tab]: trigger completion.
+[ctrl+l]/clear: clear terminal.`;
+
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/** Box-drawing help table: fixed widths so right edges align. */
+function formatCommandsHelpTable(): string {
+  const keys = Object.keys(bin);
+  const rows = keys.map((key) => ({
+    cmd: key,
+    desc: escapeHtml(COMMAND_DESCRIPTIONS[key] ?? '').replace(/\|/g, '&#124;'),
+  }));
+
+  const col1W = Math.max('Command'.length, ...rows.map((r) => r.cmd.length));
+  const col2W = Math.max('Description'.length, ...rows.map((r) => r.desc.length));
+
+  const hRule = (w: number) => '─'.repeat(w + 2);
+  const top = `┌${hRule(col1W)}┬${hRule(col2W)}┐`;
+  const sep = `├${hRule(col1W)}┼${hRule(col2W)}┤`;
+  const bot = `└${hRule(col1W)}┴${hRule(col2W)}┘`;
+
+  const row = (left: string, right: string) =>
+    `│ ${left.padEnd(col1W)} │ ${right.padEnd(col2W)} │`;
+
+  const body = [
+    top,
+    row('Command', 'Description'),
+    sep,
+    ...rows.map((r) => row(r.cmd, r.desc)),
+    bot,
+  ].join('\n');
+
+  const margin = '  ';
+  return body
+    .split('\n')
+    .map((line) => margin + line)
+    .join('\n');
+}
+
+function formatHelpBody(): string {
+  return `${formatCommandsHelpTable()}\n\n${HELP_FOOTER}`;
+}
+
 // Help
 export const help = async (args: string[]): Promise<string> => {
-  // const commands = Object.keys(bin).join(', ');
-  const commands = {
-    help: 'Display this help message.',
-    resume: 'Show interactive resume graph.',
-    // repo: 'Open my Github repository.',
-    donate: 'Support my work.',
-    email: 'Send me an email.',
-    github: 'Open my Github profile.',
-    linkedin: 'Open my LinkedIn profile.',
-    whoami: 'Reveals the meaning of my name.',
-    ls: 'List directory contents.',
-    cd: 'Change the shell working directory.',
-    date: 'Display the current date and time.',
-    sudo: 'Execute a command as the superuser.',
-    banner: 'Display the banner.',
-    sumfetch: 'Display summary.',
-    projects: 'Display my Github projects.',
-    readme: 'Display my Github README.',
-    weather: 'Display the weather for a city. Usage: weather [city].',
-  };
-
-  var c = '';
-  for (let i = 1; i <= Object.keys(bin).length; i++) {
-      let spaces = 16 - Object.keys(bin)[i - 1].length;
-      c += Object.keys(bin)[i - 1] + ' '.repeat(spaces) + '-\t' + commands[Object.keys(bin)[i - 1]] + '\n';
-  }
-  return `Welcome! Here are all the available commands:
-\n${c}\n
-[tab]: trigger completion.
-[ctrl+l]/clear: clear terminal.\n
-Type 'sumfetch' to display summary.
-`;
+  return `Welcome! Here are all the available commands:\n\n${formatHelpBody()}`;
 };
 
 const RESUME_UNAVAILABLE_MSG = 'Contact the author for the latest resume';
@@ -126,9 +162,7 @@ export const sudo = async (args?: string[]): Promise<string> => {
   return `Permission denied: with little power comes... no responsibility? `;
 };
 
-// Banner
-export const banner = (args?: string[]): string => {
-  return `
+const BANNER_ART = `
   █████   ████                                                ███      █████
   ░░███   ███░                                                ░░░      ░░███ 
    ░███  ███     ██████   █████   ██████   ████████   ██████  ████   ███████ 
@@ -138,7 +172,9 @@ export const banner = (args?: string[]): string => {
    █████ ░░████░░██████  ██████ ░░████████ █████    ░░██████  █████░░████████
   ░░░░░   ░░░░  ░░░░░░  ░░░░░░   ░░░░░░░░ ░░░░░      ░░░░░░  ░░░░░  ░░░░░░░░ 
                                                                           
-Type 'help' to see the list of available commands.
-Type 'sumfetch' to display summary.
 `;
+
+// Banner
+export const banner = (args?: string[]): string => {
+  return `${BANNER_ART.trimEnd()}\n\n${formatHelpBody()}`;
 };

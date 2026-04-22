@@ -7,7 +7,6 @@ export interface AppDockProps {
 type AppItem = { name: string; icon: string; label?: string };
 
 const apps: AppItem[] = [
-  { name: 'sumfetch', icon: '🦁' },
   { name: 'help', icon: '☎️' },
   { name: 'readme', icon: '💎' },
   { name: 'resume', icon: '📄' },
