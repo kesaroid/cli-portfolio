@@ -6,14 +6,17 @@ import { useHistory } from '../components/history/hook';
 import { History } from '../components/history/History';
 import { banner } from '../utils/bin';
 import { AppDock } from '../components/AppDock';
+import AsciiCam from '../components/AsciiCam';
 import * as bin from '../utils/bin';
-import { isCommandEnabled } from '../utils/commandConfig';
+import { PORTFOLIO_LAUNCH_APP_EVENT } from '../utils/bin/asciicam';
+import { isCommandEnabled, resolveCommandName } from '../utils/commandConfig';
 
 interface IndexPageProps {
   inputRef: React.MutableRefObject<HTMLInputElement>;
 }
 
 const IndexPage: React.FC<IndexPageProps> = ({ inputRef }) => {
+  const [activeApp, setActiveApp] = React.useState<string | null>(null);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const {
     history,
@@ -30,6 +33,18 @@ const IndexPage: React.FC<IndexPageProps> = ({ inputRef }) => {
   React.useEffect(() => {
     init();
   }, [init]);
+
+  React.useEffect(() => {
+    const onLaunch = (e: Event) => {
+      const ev = e as CustomEvent<{ app?: string }>;
+      if (ev.detail?.app === 'ascii-cam') {
+        setActiveApp('ascii-cam');
+      }
+    };
+    window.addEventListener(PORTFOLIO_LAUNCH_APP_EVENT, onLaunch);
+    return () =>
+      window.removeEventListener(PORTFOLIO_LAUNCH_APP_EVENT, onLaunch);
+  }, []);
 
   const handleCommandClick = React.useCallback(
     async (cmd: string) => {
@@ -49,15 +64,21 @@ const IndexPage: React.FC<IndexPageProps> = ({ inputRef }) => {
         } else {
           setHistory(`shell: command not found: ${commandName}`);
         }
-      } else if (isCommandEnabled(commandName) && bin[commandName]) {
-        try {
-          const output = await bin[commandName](args.slice(1));
-          setHistory(output);
-        } catch (error) {
-          setHistory(`Error executing command: ${cmd}`);
-        }
       } else {
-        setHistory(`shell: command not found: ${commandName}`);
+        const binKey = resolveCommandName(commandName) as keyof typeof bin;
+        if (
+          isCommandEnabled(commandName) &&
+          typeof bin[binKey] === 'function'
+        ) {
+          try {
+            const output = await bin[binKey](args.slice(1));
+            setHistory(output);
+          } catch (error) {
+            setHistory(`Error executing command: ${cmd}`);
+          }
+        } else {
+          setHistory(`shell: command not found: ${commandName}`);
+        }
       }
 
       setCommand('');
@@ -76,6 +97,9 @@ const IndexPage: React.FC<IndexPageProps> = ({ inputRef }) => {
       <Head>
         <title>{config.title}</title>
       </Head>
+      {activeApp === 'ascii-cam' && (
+        <AsciiCam onExit={() => setActiveApp(null)} />
+      )}
       <div className="fixed inset-0 bg-light-background dark:bg-dark-background">
         <div className="relative h-full border-2 rounded border-light-yellow dark:border-dark-yellow">
           <AppDock onCommandClick={handleCommandClick} />

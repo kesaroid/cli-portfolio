@@ -1,3 +1,4 @@
 export * from './commands';
 export * from './api_commands';
-export * from './sumfetch';
+export { sumfetch } from './sumfetch';
+export { asciicam } from './asciicam';

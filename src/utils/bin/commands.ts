@@ -9,6 +9,7 @@ import {
   getCommandCategory,
   getCommandDescription,
   getEnabledCommandNamesInOrder,
+  resolveCommandName,
 } from '../commandConfig';
 
 const HELP_FOOTER = `[tab]: trigger completion.
@@ -25,7 +26,9 @@ function escapeHtml(text: string): string {
 /** Box-drawing help table: fixed widths so right edges align. */
 function formatCommandsHelpTable(): string {
   const keys = getEnabledCommandNamesInOrder().filter(
-    (key) => key === 'clear' || Boolean(bin[key]),
+    (key) =>
+      key === 'clear' ||
+      Boolean(bin[resolveCommandName(key) as keyof typeof bin]),
   );
   const rows = keys.map((key) => ({
     cmd: key,
@@ -34,7 +37,10 @@ function formatCommandsHelpTable(): string {
   }));
 
   const col1W = Math.max('Command'.length, ...rows.map((r) => r.cmd.length));
-  const col2W = Math.max('Description'.length, ...rows.map((r) => r.desc.length));
+  const col2W = Math.max(
+    'Description'.length,
+    ...rows.map((r) => r.desc.length),
+  );
 
   const hRule = (w: number) => '─'.repeat(w + 2);
   const top = `┌${hRule(col1W)}┬${hRule(col2W)}┐`;
@@ -64,13 +70,9 @@ function formatCommandsHelpTable(): string {
     bodyRows.push(row(entry.cmd, entry.desc));
   });
 
-  const body = [
-    top,
-    row('Command', 'Description'),
-    sep,
-    ...bodyRows,
-    bot,
-  ].join('\n');
+  const body = [top, row('Command', 'Description'), sep, ...bodyRows, bot].join(
+    '\n',
+  );
 
   const margin = '  ';
   return body
@@ -104,7 +106,10 @@ export const resume = async (args: string[]): Promise<any> => {
   if (!available) {
     return RESUME_UNAVAILABLE_MSG;
   }
-  return React.createElement(ResumeGraph, { data: (resumeData as any), resumeUrl: config.resume_url });
+  return React.createElement(ResumeGraph, {
+    data: resumeData as any,
+    resumeUrl: config.resume_url,
+  });
 };
 
 // // Redirection
@@ -140,9 +145,9 @@ export const linkedin = async (args: string[]): Promise<string> => {
   return 'Opening linkedin...';
 };
 
-// 
+//
 
-// 
+//
 
 export const whoami = async (args: string[]): Promise<string> => {
   return `

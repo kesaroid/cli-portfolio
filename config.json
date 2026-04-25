@@ -74,6 +74,13 @@
       "dockIcon": "☀️",
       "category": "app"
     },
+    "ascii-cam": {
+      "enabled": true,
+      "description": "Launch an ASCII camera viewer.",
+      "showInDock": true,
+      "dockIcon": "📷",
+      "category": "app"
+    },
     "donate": {
       "enabled": true,
       "description": "Support my work.",
