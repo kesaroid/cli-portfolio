@@ -1,25 +1,11 @@
 import React from 'react';
+import { getDockCommands } from '../utils/commandConfig';
 
 export interface AppDockProps {
   onCommandClick: (command: string) => void;
 }
 
 type AppItem = { name: string; icon: string; label?: string };
-
-const apps: AppItem[] = [
-  { name: 'help', icon: '☎️' },
-  { name: 'readme', icon: '💎' },
-  { name: 'resume', icon: '📄' },
-  { name: 'projects', icon: '🚀' },
-  { name: 'whoami', icon: '🪷' },
-  { name: 'email', icon: '📧' },
-  { name: 'github', icon: '🐙' },
-  { name: 'linkedin', icon: '💼' },
-  { name: 'weather', icon: '☀️' },
-  { name: 'donate', icon: '💰' },
-  { name: 'banner', icon: '🎨' },
-  { name: 'clear', icon: '🧹' },
-];
 
 const dockSurface =
   'border-light-yellow dark:border-dark-yellow bg-light-background/95 dark:bg-dark-background/95 backdrop-blur-sm';
@@ -66,6 +52,7 @@ function DockButton({
 
 export const AppDock: React.FC<AppDockProps> = ({ onCommandClick }) => {
   const [open, setOpen] = React.useState(false);
+  const apps: AppItem[] = React.useMemo(() => getDockCommands(), []);
 
   return (
     <>

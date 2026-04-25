@@ -7,6 +7,7 @@ import { History } from '../components/history/History';
 import { banner } from '../utils/bin';
 import { AppDock } from '../components/AppDock';
 import * as bin from '../utils/bin';
+import { isCommandEnabled } from '../utils/commandConfig';
 
 interface IndexPageProps {
   inputRef: React.MutableRefObject<HTMLInputElement>;
@@ -43,8 +44,12 @@ const IndexPage: React.FC<IndexPageProps> = ({ inputRef }) => {
       const commandName = args[0].toLowerCase();
 
       if (commandName === 'clear') {
-        clearHistory();
-      } else if (bin[commandName]) {
+        if (isCommandEnabled('clear')) {
+          clearHistory();
+        } else {
+          setHistory(`shell: command not found: ${commandName}`);
+        }
+      } else if (isCommandEnabled(commandName) && bin[commandName]) {
         try {
           const output = await bin[commandName](args.slice(1));
           setHistory(output);

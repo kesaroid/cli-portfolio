@@ -17,6 +17,127 @@
     "paypal": "https://paypal.me/kesaroid",
     "cashapp": "https://cash.app/$Kesaroid"
   },
+  "commands": {
+    "email": {
+      "enabled": true,
+      "description": "Send me an email.",
+      "showInDock": true,
+      "dockIcon": "📥",
+      "category": "contact"
+    },
+    "github": {
+      "enabled": true,
+      "description": "Open my Github profile.",
+      "showInDock": false,
+      "dockIcon": "🐙",
+      "category": "contact"
+    },
+    "linkedin": {
+      "enabled": true,
+      "description": "Open my LinkedIn profile.",
+      "showInDock": true,
+      "dockIcon": "💼",
+      "category": "contact"
+    },
+    "resume": {
+      "enabled": true,
+      "description": "Show interactive resume graph.",
+      "showInDock": true,
+      "dockIcon": "💽",
+      "category": "info"
+    },
+    "readme": {
+      "enabled": true,
+      "description": "Display my Github README.",
+      "showInDock": true,
+      "dockIcon": "💎",
+      "category": "info"
+    },
+    "banner": {
+      "enabled": true,
+      "description": "Display the banner.",
+      "showInDock": true,
+      "dockIcon": "🪷",
+      "category": "info"
+    },
+    "projects": {
+      "enabled": true,
+      "description": "Display my Github projects.",
+      "showInDock": true,
+      "dockIcon": "🚀",
+      "category": "app"
+    },
+    "weather": {
+      "enabled": true,
+      "description": "Display the weather for a city.",
+      "showInDock": true,
+      "dockIcon": "☀️",
+      "category": "app"
+    },
+    "donate": {
+      "enabled": true,
+      "description": "Support my work.",
+      "showInDock": true,
+      "dockIcon": "💸",
+      "category": "app"
+    },
+    "date": {
+      "enabled": true,
+      "description": "Display the current date and time.",
+      "showInDock": false,
+      "dockIcon": "🗓️",
+      "category": "system"
+    },
+    "sumfetch": {
+      "enabled": true,
+      "description": "Display a short portfolio summary.",
+      "showInDock": false,
+      "dockIcon": "🧮",
+      "category": "system"
+    },
+    "whoami": {
+      "enabled": true,
+      "description": "Reveals the meaning of my name.",
+      "showInDock": false,
+      "dockIcon": "🕴🏻",
+      "category": "system"
+    },
+    "ls": {
+      "enabled": true,
+      "description": "List directory contents.",
+      "showInDock": false,
+      "dockIcon": "📁",
+      "category": "system"
+    },
+    "cd": {
+      "enabled": true,
+      "description": "Change the shell working directory.",
+      "showInDock": false,
+      "dockIcon": "📂",
+      "category": "system"
+    },
+    "sudo": {
+      "enabled": true,
+      "description": "Execute a command as the superuser.",
+      "showInDock": false,
+      "dockIcon": "🔐",
+      "category": "system"
+    },
+    "clear": {
+      "enabled": true,
+      "description": "Clear terminal history.",
+      "showInDock": false,
+      "dockIcon": "🧹",
+      "category": "system"
+    },
+    "help": {
+      "enabled": true,
+      "description": "Display this help message.",
+      "showInDock": true,
+      "dockIcon": "☎️",
+      "category": "system"
+    }
+  },
   "colors": {
     "light": {
       "background": "#A39E9B",

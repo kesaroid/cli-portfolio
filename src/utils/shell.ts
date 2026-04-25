@@ -1,6 +1,7 @@
 import React from 'react';
 import type { ReactNode } from 'react';
 import * as bin from './bin';
+import { isCommandEnabled } from './commandConfig';
 
 export const shell = async (
   command: string,
@@ -12,10 +13,16 @@ export const shell = async (
   args[0] = args[0].toLowerCase();
 
   if (args[0] === 'clear') {
-    clearHistory();
+    if (isCommandEnabled('clear')) {
+      clearHistory();
+    } else {
+      setHistory(
+        `shell: command not found: ${args[0]}. Try 'help' to get started.`,
+      );
+    }
   } else if (command === '') {
     setHistory('');
-  } else if (Object.keys(bin).indexOf(args[0]) === -1) {
+  } else if (!isCommandEnabled(args[0]) || Object.keys(bin).indexOf(args[0]) === -1) {
     setHistory(
       `shell: command not found: ${args[0]}. Try 'help' to get started.`,
     );
