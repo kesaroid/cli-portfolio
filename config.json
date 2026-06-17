@@ -17,6 +17,20 @@
     "paypal": "https://paypal.me/kesaroid",
     "cashapp": "https://cash.app/$Kesaroid"
   },
+  "deployedProjects": [
+    {
+      "name": "yang",
+      "description": "An AI Long-term investment coach.",
+      "url": "https://www.thats-my-quant.com/",
+      "language": "TypeScript"
+    },
+    {
+      "name": "raise",
+      "description": "A travel agency website.",
+      "url": "https://raise-4c801.web.app/",
+      "language": "TypeScript"
+    }
+  ],
   "commands": {
     "email": {
       "enabled": true,
