@@ -19,7 +19,7 @@ export const renderMarkdown = (md: string): string => {
   const codeBlocks: string[] = [];
   text = text.replace(/```([a-zA-Z0-9_-]*)\n([\s\S]*?)```/g, (_m, _lang, code) => {
     const escaped = escapeHtml(String(code).trimEnd());
-    codeBlocks.push(`<pre class="rounded-md border border-light-gray dark:border-dark-gray bg-light-background/40 dark:bg-dark-background/40 p-3 overflow-auto"><code>${escaped}</code></pre>`);
+    codeBlocks.push(`<pre class="rounded-md border border-light-gray dark:border-dark-gray bg-light-background/40 dark:bg-dark-background/40 p-3 max-w-full overflow-x-auto whitespace-pre-wrap break-words"><code>${escaped}</code></pre>`);
     return `§§CODEBLOCK_${codeBlocks.length - 1}§§`;
   });
 

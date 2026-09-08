@@ -34,7 +34,7 @@ const App = ({ Component, pageProps }) => {
       </Head>
 
       <div
-        className="text-light-foreground dark:text-dark-foreground w-full text-sm sm:text-base"
+        className="text-light-foreground dark:text-dark-foreground w-full max-w-full overflow-x-hidden text-sm sm:text-base"
         onClick={onClickAnywhere}
       >
         <main className="bg-light-background dark:bg-dark-background w-full h-full p-2 sm:p-4">

@@ -12,8 +12,11 @@ import {
   resolveCommandName,
 } from '../commandConfig';
 
-const HELP_FOOTER = `[tab]: trigger completion.
-[ctrl+l]/clear: clear terminal.`;
+type HelpRow = {
+  cmd: string;
+  desc: string;
+  category: string;
+};
 
 function escapeHtml(text: string): string {
   return text
@@ -23,18 +26,22 @@ function escapeHtml(text: string): string {
     .replace(/"/g, '&quot;');
 }
 
-/** Box-drawing help table: fixed widths so right edges align. */
-function formatCommandsHelpTable(): string {
+function getHelpRows(): HelpRow[] {
   const keys = getEnabledCommandNamesInOrder().filter(
     (key) =>
       key === 'clear' ||
       Boolean(bin[resolveCommandName(key) as keyof typeof bin]),
   );
-  const rows = keys.map((key) => ({
+  return keys.map((key) => ({
     cmd: key,
     desc: escapeHtml(getCommandDescription(key)).replace(/\|/g, '&#124;'),
     category: getCommandCategory(key),
   }));
+}
+
+/** Box-drawing help table: fixed widths so right edges align. */
+function formatCommandsHelpTable(): string {
+  const rows = getHelpRows();
 
   const col1W = Math.max('Command'.length, ...rows.map((r) => r.cmd.length));
   const col2W = Math.max(
@@ -81,8 +88,31 @@ function formatCommandsHelpTable(): string {
     .join('\n');
 }
 
+/** Two-column command / one-liner list for narrow viewports. */
+function formatCommandsHelpList(): string {
+  const rows = getHelpRows();
+  const items: string[] = [];
+  let previousCategory: string | null = null;
+
+  rows.forEach((entry) => {
+    if (previousCategory !== null && entry.category !== previousCategory) {
+      items.push('<div class="help-gap"></div>');
+    }
+    previousCategory = entry.category;
+    items.push(
+      `<span class="whitespace-nowrap text-light-yellow dark:text-dark-yellow">${entry.cmd}</span>` +
+        `<span class="min-w-0 break-words opacity-90">${entry.desc}</span>`,
+    );
+  });
+
+  return `<div class="help-list">${items.join('')}</div>`;
+}
+
 function formatHelpBody(): string {
-  return `${formatCommandsHelpTable()}\n\n${HELP_FOOTER}`;
+  return (
+    `<pre class="m-0 hidden whitespace-pre sm:block">${formatCommandsHelpTable()}</pre>` +
+    `<div class="whitespace-normal sm:hidden">${formatCommandsHelpList()}</div>`
+  );
 }
 
 // Help
@@ -189,7 +219,15 @@ const BANNER_ART = `
                                                                           
 `;
 
+function formatBannerArt(): string {
+  const art = BANNER_ART.trimEnd();
+  return (
+    `<div class="ascii-fit sm:hidden"><pre class="m-0 whitespace-pre">${art}</pre></div>` +
+    `<pre class="m-0 hidden whitespace-pre sm:block">${art}</pre>`
+  );
+}
+
 // Banner
 export const banner = (args?: string[]): string => {
-  return `${BANNER_ART.trimEnd()}\n\n${formatHelpBody()}`;
+  return `${formatBannerArt()}\n\n${formatHelpBody()}`;
 };

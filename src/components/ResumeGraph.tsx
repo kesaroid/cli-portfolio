@@ -52,7 +52,7 @@ const NodeBadge = React.forwardRef<
   }
 >(({ label, clickable, leaf, expandable, open, onClick, timeline, root }, ref) => {
   const base =
-    'relative inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border bg-light-background dark:bg-dark-background text-light-foreground dark:text-dark-foreground shadow-sm transition-colors duration-150 select-none whitespace-nowrap';
+    'relative inline-flex max-w-full flex-wrap items-center gap-2 px-3 py-1.5 rounded-lg border bg-light-background dark:bg-dark-background text-light-foreground dark:text-dark-foreground shadow-sm transition-colors duration-150 select-none whitespace-normal sm:whitespace-nowrap';
   const tone = root
     ? 'border-2 border-light-yellow dark:border-dark-yellow text-light-yellow dark:text-dark-yellow font-semibold'
     : clickable
@@ -218,7 +218,7 @@ const Branch: React.FC<{
   const markerId = `rg-arrow-${node.id}-${depth}`;
 
   return (
-    <div ref={containerRef} className="relative flex items-center">
+    <div ref={containerRef} className="relative flex min-w-0 max-w-full flex-col items-start sm:flex-row sm:items-center">
       <NodeBadge
         ref={parentRef}
         label={node.label}
@@ -232,14 +232,14 @@ const Branch: React.FC<{
       />
 
       {open && allChildren.length > 0 && (
-        <div className="ml-16 flex flex-col gap-3 py-1">
+        <div className="ml-4 mt-2 flex min-w-0 flex-col gap-3 py-1 sm:ml-16 sm:mt-0">
           {allChildren.map((child, i) => (
             <div
               key={child.id}
               ref={(el) => {
                 childWrapperRefs.current[i] = el;
               }}
-              className="rg-branch-enter"
+              className="rg-branch-enter min-w-0"
               style={{ animationDelay: `${Math.min(i, 8) * 40}ms` }}
             >
               <Branch node={child} depth={depth + 1} />
@@ -255,7 +255,7 @@ const Branch: React.FC<{
           viewBox={`0 0 ${size.w} ${size.h}`}
           preserveAspectRatio="none"
           overflow="visible"
-          className="absolute left-0 top-0 pointer-events-none text-light-gray dark:text-dark-gray"
+          className="absolute left-0 top-0 hidden pointer-events-none text-light-gray dark:text-dark-gray sm:block"
           style={{ overflow: 'visible' }}
           aria-hidden
         >
@@ -315,8 +315,8 @@ const DownloadButton: React.FC<{ resumeUrl: string }> = ({ resumeUrl }) => (
 
 export const ResumeGraph: React.FC<Props> = ({ data, resumeUrl }) => {
   return (
-    <div className="my-4 w-full overflow-x-auto">
-      <div className="inline-flex items-center gap-4 pr-6 pb-2 align-top">
+    <div className="my-4 w-full min-w-0 max-w-full overflow-hidden">
+      <div className="flex w-full min-w-0 flex-col items-start gap-4 pb-2 sm:flex-row sm:items-center">
         {resumeUrl && <DownloadButton resumeUrl={resumeUrl} />}
         <RGProvider>
           <Branch node={data.root} depth={0} />

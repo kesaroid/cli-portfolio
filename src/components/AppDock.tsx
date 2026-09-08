@@ -51,7 +51,6 @@ function DockButton({
 }
 
 export const AppDock: React.FC<AppDockProps> = ({ onCommandClick }) => {
-  const [open, setOpen] = React.useState(false);
   const apps: AppItem[] = React.useMemo(() => getDockCommands(), []);
 
   return (
@@ -70,33 +69,12 @@ export const AppDock: React.FC<AppDockProps> = ({ onCommandClick }) => {
         ))}
       </aside>
 
-      {/* Mobile — bottom bar with expand toggle */}
+      {/* Mobile — always-visible bottom emoji shortcuts */}
       <div
-        className={`fixed bottom-0 left-0 right-0 z-20 flex flex-col border-t-2 md:hidden ${dockSurface}`}
+        className={`fixed bottom-0 left-0 right-0 z-20 w-full border-t-2 md:hidden ${dockSurface}`}
         aria-label="Command shortcuts"
       >
-        <div className="flex items-center justify-between border-b border-light-yellow/40 px-2 py-1 dark:border-dark-yellow/40">
-          <span className="text-xs font-medium text-light-gray dark:text-dark-gray">
-            Shortcuts
-          </span>
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            className="rounded px-2 py-1 text-xs font-semibold text-light-foreground transition-colors hover:bg-light-yellow/15 dark:text-dark-foreground dark:hover:bg-dark-yellow/15 focus:outline-none focus:ring-2 focus:ring-light-yellow dark:focus:ring-dark-yellow"
-            aria-expanded={open}
-            aria-controls="app-dock-mobile-list"
-          >
-            {open ? 'Collapse' : 'Expand'}
-          </button>
-        </div>
-        <div
-          id="app-dock-mobile-list"
-          className={
-            open
-              ? 'flex max-h-[7.5rem] gap-1 overflow-x-auto overflow-y-hidden px-2 py-2'
-              : 'hidden'
-          }
-        >
+        <div className="flex w-full flex-nowrap items-center gap-1 overflow-x-auto overflow-y-hidden px-2 py-2">
           {apps.map((item) => (
             <DockButton
               key={item.name}

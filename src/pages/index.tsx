@@ -100,12 +100,12 @@ const IndexPage: React.FC<IndexPageProps> = ({ inputRef }) => {
       {activeApp === 'ascii-cam' && (
         <AsciiCam onExit={() => setActiveApp(null)} />
       )}
-      <div className="fixed inset-0 bg-light-background dark:bg-dark-background">
-        <div className="relative h-full border-2 rounded border-light-yellow dark:border-dark-yellow">
+      <div className="fixed inset-0 overflow-hidden bg-light-background dark:bg-dark-background">
+        <div className="relative h-full min-w-0 max-w-full overflow-hidden border-2 rounded border-light-yellow dark:border-dark-yellow">
           <AppDock onCommandClick={handleCommandClick} />
           <div
             ref={containerRef}
-            className="h-full overflow-y-auto overflow-x-auto bg-light-background dark:bg-dark-background whitespace-pre max-w-full p-4 pb-44 sm:px-8 sm:pt-8 sm:pb-44 md:p-8 md:pl-16"
+            className="h-full min-w-0 max-w-full overflow-y-auto overflow-x-hidden bg-light-background dark:bg-dark-background p-2 pb-24 sm:px-8 sm:pt-8 sm:pb-8 md:p-8 md:pl-16"
           >
             <History history={history} />
             <Input
